@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Brain Tumor Classifier</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+            min-height: 100vh;
+        }
+        .card {
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            background: rgba(255,255,255,0.9);
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #36d1c4 0%, #5b86e5 100%);
+            border: none;
+        }
+        .result {
+            font-size: 1.2em;
+        }
+        .logo {
+            width: 80px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="card p-4" style="width: 100%; max-width: 420px;">
+            <div class="text-center">
+                <img src="https://cdn-icons-png.flaticon.com/512/3209/3209265.png" class="logo" alt="Brain Icon">
+                <h2 class="mb-3">Brain Tumor Type Detection</h2>
+                <p class="text-muted mb-4">Upload an MRI image to detect the tumor type.</p>
+            </div>
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <input class="form-control" type="file" name="file" accept="image/*" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Predict</button>
+                </div>
+            </form>
+            {% if prediction %}
+                <div class="alert alert-success mt-4 result text-center">
+                    <strong>Prediction:</strong> {{ prediction }}<br>
+                    <strong>Confidence:</strong> {{ confidence }}
+                </div>
+            {% endif %}
+            {% if error %}
+                <div class="alert alert-danger mt-4 text-center">{{ error }}</div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
